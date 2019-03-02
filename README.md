@@ -35,8 +35,8 @@
 データベースの定義  
 エンティティと属性  
 # ・ログイン　　
-・名前　　
-・メールアドレス　　
+・名前  
+・メールアドレス  
 ・パスワード　　
 # ・代講要請  
 ・時間  
@@ -51,11 +51,14 @@ Users
     ・name  
     ・e-mail  
     ・passward  
-Students  
+Classes  
+    ・date  
     ・time  
     ・name  
     ・grade  
     ・subject  
     ・remark(備考欄)  
-Act person  
-    ・act person name
+Act_person  
+    ・act_person_name  
+    ・date  
+    ・time  
