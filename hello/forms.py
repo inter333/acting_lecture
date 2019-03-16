@@ -6,5 +6,5 @@ class HelloForm(forms.Form):
     name = forms.CharField(label='name')
     grade = forms.CharField(label='grade')
     subject = forms.CharField(label='subject')
-    remark = forms.CharField(label='remark')
-
+    remark = forms.CharField(label='remark',required=False)
+##バリデーション
