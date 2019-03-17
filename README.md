@@ -52,7 +52,7 @@
 # テーブルの定義　　
 Users  
     ・name  
-    ・e-mail  
+    ・mail  
     ・passward  
 Classes  
     ・date  
