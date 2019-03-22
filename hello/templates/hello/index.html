@@ -9,13 +9,15 @@
 </head>
 <body>
     <h1>{{title}}</h1>
-    <p>{{message|safe}}</p>
     <table>
-    <form action="{% url 'index' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <tr><td></td><td><input type="submit" value="click"></td></tr>
-    </form>
+        <tr>
+            <th>data</th>
+        </tr>
+    {% for item in classes %}
+        <tr>
+            <td>{{item}}</td>
+        </tr>
+    {% endfor %}
     </table>
 </body>
 </html>

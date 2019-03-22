@@ -11,15 +11,15 @@ class Users(models.Model):
 
 
 class Classes(models.Model):
-    date = models.DateField()
-    time = models.TimeField()
-    name = models.CharField(max_length=100)
-    grade = models.CharField(max_length=100)
+    date    = models.DateField()
+    time    = models.TimeField()
+    name    = models.CharField(max_length=100)
+    grade   = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
-    remark = models.CharField(max_length=100)
+    remark  = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.date
+        return self.subject
 
 
 class Act_person(models.Model):
