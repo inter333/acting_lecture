@@ -9,13 +9,24 @@
 </head>
 <body>
     <h1>{{title}}</h1>
+    <P>{{message|safe}}</P>
     <table>
         <tr>
-            <th>data</th>
+            <th>DATE</th>
+            <th>TIME</th>
+            <th>NAME</th>
+            <th>GRADE</th>
+            <th>SUBJECT</th>
+            <th>REMARK</th>
         </tr>
-    {% for item in classes %}
+    {% for item in data %}
         <tr>
-            <td>{{item}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.time}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.grade}}</td>
+            <td>{{item.subject}}</td>
+            <td>{{item.remark}}</td>
         </tr>
     {% endfor %}
     </table>

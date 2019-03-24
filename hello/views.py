@@ -9,45 +9,23 @@ from .models import Classes
 def calender(request):
     return render(request,'hello/calender.html')
 
-class HelloView(TemplateView):
-
-    def __init__(self):
-        self.params = {
-               'title':'代行要請',
-               'message':'コマの情報',
-               'form':ClassesForm()
-            }
-    
-    def get(self,request):
-        return render(request,'hello/index.html',self.params)
-
-
-    def post(self,request):
-        cls = Classes()
-        cls.date = request.POST['date']
-        cls.time = request.POST['time']
-        cls.subject = request.POST['subject']
-        print(str(request.POST['subject']))
-
-
-        self.params['form'] = ClassesForm(request.POST)
-        self.params['form'] = ClassesForm(request.POST)
-        return render(request,'hello/index.html',self.params)
-
 
 def index(request):
-    data = Classes.object.all()
+    data = Classes.objects.all()
     params = {
-        'title':'Hello',
-        'data':data,
-        }
+             'title':'Hello',
+             'message':'all classes',
+             'form':'Classesform',
+             'data':data,
+    }
     return render(request,'hello/index.html',params)
 
 #create model
 def create(request):
+    data = Classes.objects.all()
     params = {
         'title':'Hello',
-        'form':ClassesForm(),
+        'data':data,
     }
     if (request.method == 'POST'):
         date = request.POST['date']
@@ -59,7 +37,7 @@ def create(request):
         classes = Classes(date=date,time=time,name=name,\
                  grade=grade,subject=subject,remark=remark)
         classes.save()
-        return redirect(to='/hello/calender')
+        return redirect(to='/hello/')
     return render(request,'hello/create.html',params)
 
 
