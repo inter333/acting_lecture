@@ -1,4 +1,6 @@
+import datetime
 from django.db import models
+from django.utils import timezone
 
 class Users(models.Model):
     name=models.CharField(max_length=100)
@@ -30,6 +32,5 @@ class Act_person(models.Model):
     def __str__(self):
         return self.act_person_name
     
-
 
 # Create your models here.
