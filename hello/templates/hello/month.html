@@ -24,7 +24,7 @@
                     {% endif %}
 
                 {% if month_current.month == day.month %}
-                    <a href="{% url 'hello:index' %}">{{ day.day }}</a>
+                    <a href="{% url 'hello:index' day.year day.month day.day %}">{{ day.day }}</a>
                 {% endif %}
 
                 </td>

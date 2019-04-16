@@ -1,5 +1,11 @@
 from django import forms
 from.models import Users,Classes,Act_person
+from django.contrib.auth.forms import UserCreationForm
+
+class SignUpForm(UserCreationForm):
+    username = forms.CharField()
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
 class ClassesForm(forms.Form):
     date    = forms.DateField(label='date')
