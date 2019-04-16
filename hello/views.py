@@ -9,6 +9,7 @@ from . import mixins
 from .forms import SignUpForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -24,7 +25,7 @@ def signup(request):
     return render(request, 'hello/signup.html', {'form': form})
 
 
-
+@login_required(login_url='/hello/login/')
 def index(request, year, month, day):
     data = Classes.objects.filter(date__year=year,date__month=month,date__day=day)
     params = {
@@ -36,7 +37,7 @@ def index(request, year, month, day):
     }
     return render(request,'hello/index.html',params)
 
-#create model
+@login_required(login_url='/hello/login/')
 def create(request):
     data = Classes.objects.filter()
     params = {
@@ -58,7 +59,18 @@ def create(request):
         return redirect(to='/hello/')
     return render(request,'hello/create.html',params)
 
-
+@login_required(login_url='/hello/login/')
+def edit(request):
+    data = Classes.objects.all()
+    if (request.method == 'POST'):
+        classes = ClassesForm(request.POST,instance=data)
+        classes.save()
+        return redirect(to='/hello')
+    params = {
+        'title': '代行要請',
+        'form':ClassesForm(instance=data),
+    }
+    return render(request,'hello/edit.html',params)
 
 class MonthCalendar(LoginRequiredMixin,mixins.MonthCalendarMixin, generic.TemplateView):
     login_url = '/login/'

@@ -10,7 +10,7 @@
 <body>
     <h1>{{title}}</h1>
     <table>
-        <form action="{% url 'edit' username %}" method="post">
+        <form action="{% url 'edit' id %}" method="post">
         {% csrf_token %}
         {{ form.as_table }}
         <tr><td></td><td><input type="submit" value=click"></td></tr>

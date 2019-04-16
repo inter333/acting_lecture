@@ -28,6 +28,7 @@
             <td>{{item.grade}}</td>
             <td>{{item.subject}}</td>
             <td>{{item.remark}}</td>
+            <td><a href="{% url 'hello:edit'  %}">Edit</a></td>
         </tr>
     {% endfor %}
     </table>
