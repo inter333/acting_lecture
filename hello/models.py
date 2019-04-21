@@ -19,6 +19,7 @@ class Classes(models.Model):
     grade   = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
     remark  = models.CharField(max_length=100)
+    act_user = models.CharField(max_length=100)
 
     def __str__(self):
         return self.subject

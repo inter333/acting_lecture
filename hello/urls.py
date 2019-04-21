@@ -15,5 +15,6 @@ urlpatterns = [
         path('create/',views.create,name='create'),
         path('month/<int:year>/<int:month>', views.MonthCalendar.as_view(), name='month'),
         path ('signup',views.signup,name='signup'),
-        path('edit',views.edit,name='edit'),
+        path('edit/<int:num>',views.edit,name='edit'),
+        path('delete/<int:num>',views.delete,name='delete'),
 ]

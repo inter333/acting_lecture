@@ -28,12 +28,17 @@ def signup(request):
 @login_required(login_url='/hello/login/')
 def index(request, year, month, day):
     data = Classes.objects.filter(date__year=year,date__month=month,date__day=day)
+    #user_id = request.user.id
     params = {
              'title':'代行情報',
              'message':'代行要請',
              'msg':'top',
              'form':'Classesform',
              'data':data,
+             'year':year,
+             'month':month,
+             'day':day,
+             #'user_id':user_id
     }
     return render(request,'hello/index.html',params)
 
@@ -60,17 +65,40 @@ def create(request):
     return render(request,'hello/create.html',params)
 
 @login_required(login_url='/hello/login/')
-def edit(request):
-    data = Classes.objects.all()
+def edit(request,num,year,month,day):
+    data = Classes.objects.get(id=num)
     if (request.method == 'POST'):
         classes = ClassesForm(request.POST,instance=data)
+        #classes.act_user = request.user.username
         classes.save()
-        return redirect(to='/hello')
+        return redirect(to='/hello/index<int:year>/<int:month>/<int:day>')
     params = {
         'title': '代行要請',
         'form':ClassesForm(instance=data),
+        'id':num,
+        'year':year,
+        'month':month,
+        'day':day,
     }
+    print(request.user.username)
     return render(request,'hello/edit.html',params)
+
+def delete(request,num):
+    classes = Classes.objects.get(id=num)
+    if (request.method == 'POST'):
+        classes.delete()
+        return redirect(to='/hello')
+    params = {
+        'title':'代行要請削除',
+        'id':num,
+        'data':classes,
+    }
+    return render(request,'hello/delete.html',params)
+
+
+
+
+
 
 class MonthCalendar(LoginRequiredMixin,mixins.MonthCalendarMixin, generic.TemplateView):
     login_url = '/login/'

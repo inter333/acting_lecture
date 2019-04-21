@@ -28,7 +28,14 @@
             <td>{{item.grade}}</td>
             <td>{{item.subject}}</td>
             <td>{{item.remark}}</td>
-            <td><a href="{% url 'hello:edit'  %}">Edit</a></td>
+            <td>{% if item.act_user == '' %}
+                    <input type="submit" value="代行する">
+                  {% else %}
+                  {{item.act_user}} 
+                {% endif %}
+            </td>
+            <td><a href="{% url 'hello:edit' item.id %}">Edit</a></td>
+            <td><a href="{% url 'hello:delete' item.id %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>

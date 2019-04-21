@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta chardet="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'hello/css/style.css' %}" />
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <p>以下のレコードを削除します。</p>
+    <table>
+        <tr><th>DATE</th><td>{{data.date}}</td></tr>
+        <tr><th>TIME</th><td>{{data.time}}</td></tr>
+        <tr><th>NAME</th><td>{{data.name}}</td></tr>
+        <tr><th>GRADE</th><td>{{data.grade}}</td></tr>
+        <tr><th>SUBJECT</th><td>{{data.subject}}</td></tr>
+        <tr><th>REMARK</th><td>{{data.remark}}</td></tr>
+        <form action="{% url 'hello:delete' id %}" method="post">
+        {% csrf_token %}
+        <tr><th></th><td><input type="submit" value="ok"></td></tr>
+        </form>
+    </table>
+</body>
+</html>
