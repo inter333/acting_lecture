@@ -17,7 +17,7 @@
         <tr><th>GRADE</th><td>{{data.grade}}</td></tr>
         <tr><th>SUBJECT</th><td>{{data.subject}}</td></tr>
         <tr><th>REMARK</th><td>{{data.remark}}</td></tr>
-        <form action="{% url 'hello:delete' id %}" method="post">
+        <form action="{% url 'hello:delete' id year month day %}" method="post">
         {% csrf_token %}
         <tr><th></th><td><input type="submit" value="ok"></td></tr>
         </form>

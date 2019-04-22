@@ -12,9 +12,9 @@ urlpatterns = [
         path('', views.MonthCalendar.as_view(), name='month'),
         path('index', views.index,name='index'),
         path('index/<int:year>/<int:month>/<int:day>', views.index, name='index'),
-        path('create/',views.create,name='create'),
+        path('create/<int:year>/<int:month>/<int:day>',views.create,name='create'),
         path('month/<int:year>/<int:month>', views.MonthCalendar.as_view(), name='month'),
         path ('signup',views.signup,name='signup'),
-        path('edit/<int:num>',views.edit,name='edit'),
-        path('delete/<int:num>',views.delete,name='delete'),
+        path('edit/<int:num>/<int:year>/<int:month>/<int:day>',views.edit,name='edit'),
+        path('delete/<int:num>/<int:year>/<int:month>/<int:day>',views.delete,name='delete'),
 ]

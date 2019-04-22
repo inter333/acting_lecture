@@ -43,13 +43,17 @@ def index(request, year, month, day):
     return render(request,'hello/index.html',params)
 
 @login_required(login_url='/hello/login/')
-def create(request):
+def create(request,year,month,day):
     data = Classes.objects.filter()
     params = {
         'title':'代行要請',
         'message':'top',
         'form':ClassesForm(),
-        'data':data
+        'data':data,
+        'year':year,
+        'month':month,
+        'day':day,
+
     }
     if (request.method == 'POST'):
         date = request.POST['date']
@@ -61,7 +65,10 @@ def create(request):
         classes = Classes(date=date,time=time,name=name,\
                  grade=grade,subject=subject,remark=remark)
         classes.save()
-        return redirect(to='/hello/')
+        year = str(year)
+        month = str(month)
+        day = str(day)
+        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     return render(request,'hello/create.html',params)
 
 @login_required(login_url='/hello/login/')
@@ -71,7 +78,10 @@ def edit(request,num,year,month,day):
         classes = ClassesForm(request.POST,instance=data)
         #classes.act_user = request.user.username
         classes.save()
-        return redirect(to='/hello/index<int:year>/<int:month>/<int:day>')
+        year = str(year)
+        month = str(month)
+        day = str(day)
+        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     params = {
         'title': '代行要請',
         'form':ClassesForm(instance=data),
@@ -83,15 +93,22 @@ def edit(request,num,year,month,day):
     print(request.user.username)
     return render(request,'hello/edit.html',params)
 
-def delete(request,num):
+@login_required(login_url='/hello/login/')
+def delete(request,num,year,month,day):
     classes = Classes.objects.get(id=num)
     if (request.method == 'POST'):
         classes.delete()
-        return redirect(to='/hello')
+        year = str(year)
+        month = str(month)
+        day = str(day)
+        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     params = {
         'title':'代行要請削除',
         'id':num,
         'data':classes,
+        'year':year,
+        'month':month,
+        'day':day,
     }
     return render(request,'hello/delete.html',params)
 

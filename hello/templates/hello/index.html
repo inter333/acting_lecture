@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>{{title}}</h1>
-    <P><a href="{% url 'hello:create' %}">{{message|safe}}</a></P>
+    <P><a href="{% url 'hello:create' year month day %}">{{message|safe}}</a></P>
     <p><a href="{% url 'hello:month' %}">{{msg|safe}}</a></p>
     <table>
         <tr>
@@ -34,8 +34,8 @@
                   {{item.act_user}} 
                 {% endif %}
             </td>
-            <td><a href="{% url 'hello:edit' item.id %}">Edit</a></td>
-            <td><a href="{% url 'hello:delete' item.id %}">Delete</a></td>
+            <td><a href="{% url 'hello:edit' item.id year month day %}">Edit</a></td>
+            <td><a href="{% url 'hello:delete' item.id year month day %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>
