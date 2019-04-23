@@ -10,6 +10,7 @@ from .forms import SignUpForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 
 
@@ -82,6 +83,9 @@ def edit(request,num,year,month,day):
         month = str(month)
         day = str(day)
         return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+
+    form = ClassesForm(instance=data)
+    form.fields['act_user'].widget = forms.CharField(label='act_user',required=False)     
     params = {
         'title': '代行要請',
         'form':ClassesForm(instance=data),
