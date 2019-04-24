@@ -88,7 +88,7 @@ def edit(request,num,year,month,day):
     form.fields['act_user'].widget = forms.CharField(label='act_user',required=False)     
     params = {
         'title': '代行要請',
-        'form':ClassesForm(instance=data),
+        'form': form,
         'id':num,
         'year':year,
         'month':month,

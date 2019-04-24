@@ -16,10 +16,12 @@ class ClassesForm(forms.ModelForm):
     #remark  = forms.CharField(label='remark',required=False)
     class Meta:
         model  = Classes
-        fields = ['date','time','name','grade','subject','remark']
+        fields = ['date','time','name','grade','subject','remark','act_user']
         widgets = {'act_user': forms.HiddenInput()}
 
 ##バリデーション
+
+
 
 class UsersForm(forms.Form):
     name     = forms.CharField(label='name')
