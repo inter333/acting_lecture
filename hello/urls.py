@@ -17,4 +17,5 @@ urlpatterns = [
         path ('signup',views.signup,name='signup'),
         path('edit/<int:num>/<int:year>/<int:month>/<int:day>',views.edit,name='edit'),
         path('delete/<int:num>/<int:year>/<int:month>/<int:day>',views.delete,name='delete'),
+        path('search',views.search,name='search'),
 ]

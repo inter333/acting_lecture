@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django import forms
+from . forms import SearchForm
 
 
 
@@ -88,7 +89,7 @@ def edit(request,num,year,month,day):
     form.fields['act_user'].widget = forms.CharField(label='act_user',required=False)     
     params = {
         'title': '代行要請',
-        'form': form,
+        'form':form,
         'id':num,
         'year':year,
         'month':month,
@@ -115,6 +116,25 @@ def delete(request,num,year,month,day):
         'day':day,
     }
     return render(request,'hello/delete.html',params)
+
+@login_required(login_url='/hello/login/')
+def search(request):
+    if (request.method == 'POST'):
+        msg = '調べたい日付をYYYY-MM-DD形式で検索してください。'
+        form = SearchForm(request.POST)
+        str = request.POST['search']
+        data = Classes.objects.filter(date=str)
+    else:
+        msg = '調べたい日付をYYYY-MM-DD形式で検索してください。'
+        form = SearchForm()
+        data = Classes.objects.all()
+    params = {
+        'title':'代行要請日の検索',
+        'message':msg,
+        'form':form,
+        'data':data,
+    }
+    return render(request,'hello/search.html',params)
 
 
 

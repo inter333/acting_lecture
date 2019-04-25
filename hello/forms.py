@@ -39,5 +39,8 @@ class PostForm(forms.Form):
         model  = Classes
         fields = ['subject']
 
+class SearchForm(forms.Form):
+    search = forms.CharField(label='Search',required=False)
+
 
 
