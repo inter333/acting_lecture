@@ -42,6 +42,24 @@ def index(request, year, month, day):
              'day':day,
              #'user_id':user_id
     }
+    if (request.method == 'POST'):
+        date = request.POST['date']
+        time = request.POST['time']
+        name = request.POST['name']
+        grade = request.POST['grade']
+        subject = request.POST['subject']
+        remark = request.POST['remark']
+        classes = Classes(date=date,time=time,name=name,\
+                 grade=grade,subject=subject,remark=remark)
+        classes.act_user = request.user.username
+        act_user = classes.act_user
+        classes = Classes(date=date,time=time,name=name,\
+                 grade=grade,subject=subject,remark=remark,act_user=act_user)
+        classes.save()
+        year = str(year)
+        month = str(month)
+        day = str(day)
+        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     return render(request,'hello/index.html',params)
 
 @login_required(login_url='/hello/login/')
