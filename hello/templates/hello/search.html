@@ -27,6 +27,7 @@
             <th>GRADE</th>
             <th>SUBJECT</th>
             <th>REMARK</th>
+            <th>ACT_USER</th>
         </tr>
     {% for item in data %}
         <tr>
@@ -37,7 +38,10 @@
             <td>{{item.subject}}</td>
             <td>{{item.remark}}</td>
             <td>{% if item.act_user == '' %}
+                    <form action="{% url 'hello:register' item.id item.date.year item.date.month item.date.day  %}" method="post">
+                    {% csrf_token %}
                     <input type="submit" value="代行する">
+                    </form>
                   {% else %}
                   {{item.act_user}} 
                 {% endif %}

@@ -8,15 +8,9 @@ class SignUpForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput)
 
 class ClassesForm(forms.ModelForm):
-    #date    = forms.DateField(label='date')
-    #time    = forms.TimeField(label='time')
-    #name    = forms.CharField(label='name')
-    #grade   = forms.CharField(label='grade')
-    #subject = forms.CharField(label='subject')
-    #remark  = forms.CharField(label='remark',required=False)
     class Meta:
         model  = Classes
-        fields = ['date','time','name','grade','subject','remark','act_user']
+        fields = ['date','time','name','grade','subject','remark']
         widgets = {'act_user': forms.HiddenInput()}
 
 ##バリデーション

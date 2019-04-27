@@ -42,28 +42,34 @@ def index(request, year, month, day):
              'day':day,
              #'user_id':user_id
     }
-    try:
-        if (request.method == 'POST'):
-            date = request.POST['date']
-            time = request.POST['time']
-            name = request.POST['name']
-            grade = request.POST['grade']
-            subject = request.POST['subject']
-            remark = request.POST['remark']
-            classes = Classes(date=date,time=time,name=name,\
-                     grade=grade,subject=subject,remark=remark)
-            classes.act_user = request.user.username
-            act_user = classes.act_user
-            classes = Classes(date=date,time=time,name=name,\
-                    grade=grade,subject=subject,remark=remark,act_user=act_user)
-            classes.save()
-            year = str(year)
-            month = str(month)
-            day = str(day)
-            return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
-    except KeyError:
-        pass
+    if (request.method == 'POST'):
+        date = request.POST['date']
+        time = request.POST['time']
+        name = request.POST['name']
+        grade = request.POST['grade']
+        subject = request.POST['subject']
+        remark = request.POST['remark']
+        print(request.user.username)
+        classes = Classes(date=date,time=time,name=name,\
+                grade=grade,subject=subject,remark=remark,act_user=request.user.username)
+        classes.save()
+        year = str(year)
+        month = str(month)
+        day = str(day)
+        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     return render(request,'hello/index.html',params)
+
+@login_required(login_url='/hello/login/')
+def register(request,num,year,month,day):
+    classes = Classes.objects.get(id=num)
+    classes.act_user = request.user.username
+    classes.save()
+    year = str(year)
+    month = str(month)
+    day = str(day)
+    return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+
+
 
 @login_required(login_url='/hello/login/')
 def create(request,year,month,day):
@@ -71,12 +77,12 @@ def create(request,year,month,day):
     params = {
         'title':'代行要請',
         'message':'top',
+        'msg':'前に戻る',
         'form':ClassesForm(),
         'data':data,
         'year':year,
         'month':month,
         'day':day,
-
     }
     if (request.method == 'POST'):
         date = request.POST['date']
@@ -107,6 +113,8 @@ def edit(request,num,year,month,day):
         return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     params = {
         'title': '代行要請',
+        'messege':'top',
+        'msg':'前に戻る',
         'form':ClassesForm(instance=data),
         'id':num,
         'year':year,
@@ -126,6 +134,8 @@ def delete(request,num,year,month,day):
         return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
     params = {
         'title':'代行要請削除',
+        'messege':'top',
+        'msg':'前に戻る',
         'id':num,
         'data':classes,
         'year':year,
