@@ -11,7 +11,8 @@
     <h1>{{title}}</h1>
     <p><a href="{% url 'hello:month' %}">{{message|safe}}</a></p>
     <p><a href="{% url 'hello:index' year month day %}">{{msg|safe}}</a></p>
-    <p>{{year}}/{{month}}/{{day}}</p>
+    <p>今日は{{year}}/{{month}}/{{day}}です。</p>
+    <p>日付はYYYY-MM-DD形式、時間はHH:MM形式で入力してください。</p>
     <table>
         <form action="{% url 'hello:create' year month day %}" method="post">
         {% csrf_token %}
