@@ -28,6 +28,8 @@
             <td>{{item.grade}}</td>
             <td>{{item.subject}}</td>
             <td>{{item.remark}}</td>
+            <form action="{% url 'hello:index' year month day %}" method="post">
+            {% csrf_token %}
             <td>{% if item.act_user == '' %}
                     <input type="submit" value="代行する">
                   {% else %}

@@ -42,24 +42,27 @@ def index(request, year, month, day):
              'day':day,
              #'user_id':user_id
     }
-    if (request.method == 'POST'):
-        date = request.POST['date']
-        time = request.POST['time']
-        name = request.POST['name']
-        grade = request.POST['grade']
-        subject = request.POST['subject']
-        remark = request.POST['remark']
-        classes = Classes(date=date,time=time,name=name,\
-                 grade=grade,subject=subject,remark=remark)
-        classes.act_user = request.user.username
-        act_user = classes.act_user
-        classes = Classes(date=date,time=time,name=name,\
-                 grade=grade,subject=subject,remark=remark,act_user=act_user)
-        classes.save()
-        year = str(year)
-        month = str(month)
-        day = str(day)
-        return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+    try:
+        if (request.method == 'POST'):
+            date = request.POST['date']
+            time = request.POST['time']
+            name = request.POST['name']
+            grade = request.POST['grade']
+            subject = request.POST['subject']
+            remark = request.POST['remark']
+            classes = Classes(date=date,time=time,name=name,\
+                     grade=grade,subject=subject,remark=remark)
+            classes.act_user = request.user.username
+            act_user = classes.act_user
+            classes = Classes(date=date,time=time,name=name,\
+                    grade=grade,subject=subject,remark=remark,act_user=act_user)
+            classes.save()
+            year = str(year)
+            month = str(month)
+            day = str(day)
+            return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+    except KeyError:
+        pass
     return render(request,'hello/index.html',params)
 
 @login_required(login_url='/hello/login/')
@@ -102,18 +105,14 @@ def edit(request,num,year,month,day):
         month = str(month)
         day = str(day)
         return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
-
-    form = ClassesForm(instance=data)
-    form.fields['act_user'].widget = forms.CharField(label='act_user',required=False)     
     params = {
         'title': '代行要請',
-        'form':form,
+        'form':ClassesForm(instance=data),
         'id':num,
         'year':year,
         'month':month,
         'day':day,
     }
-    print(request.user.username)
     return render(request,'hello/edit.html',params)
 
 @login_required(login_url='/hello/login/')
