@@ -11,6 +11,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">ログイン</button>
+        <p><a href="{% url 'hello:signup'  %}">ユーザー作成</a></p>
     </form>
 </body>
 </html>

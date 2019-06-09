@@ -35,7 +35,10 @@
                     <input type="submit" value="代行する">
                     </form>
                   {% else %}
-                  {{item.act_user}} 
+                  <form action="{% url 'hello:cancel' item.id year month day %}" method="post">
+                    {% csrf_token %}
+                    {{item.act_user}} <input type="submit" value="キャンセルする">
+                    </form>
                 {% endif %}
             </td>
             <td><a href="{% url 'hello:edit' item.id year month day %}">Edit</a></td>

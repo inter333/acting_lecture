@@ -11,7 +11,8 @@ class ClassesForm(forms.ModelForm):
     class Meta:
         model  = Classes
         fields = ['date','time','name','grade','subject','remark']
-        widgets = {'act_user': forms.HiddenInput()}
+        widgets = {'act_user':forms.HiddenInput(),
+            }
 
 ##バリデーション
 

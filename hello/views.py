@@ -69,21 +69,21 @@ def register(request,num,year,month,day):
     day = str(day)
     return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
 
+@login_required(login_url='/hello/login/')
+def cancel(request,num,year,month,day):
+    classes = Classes.objects.get(id=num)
+    classes.act_user = ""
+    classes.save()
+    year = str(year)
+    month = str(month)
+    day = str(day)
+    return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+
+
 
 
 @login_required(login_url='/hello/login/')
 def create(request,year,month,day):
-    data = Classes.objects.filter()
-    params = {
-        'title':'代行要請',
-        'message':'top',
-        'msg':'前に戻る',
-        'form':ClassesForm(),
-        'data':data,
-        'year':year,
-        'month':month,
-        'day':day,
-    }
     if (request.method == 'POST'):
         date = request.POST['date']
         time = request.POST['time']
@@ -98,6 +98,23 @@ def create(request,year,month,day):
         month = str(month)
         day = str(day)
         return redirect(to='/hello/index/'+year+'/'+month+'/'+day)
+    data = Classes.objects.filter()
+
+    classform = ClassesForm()
+    classform.fields["date"] = forms.DateField(initial=str(year) + '-' + str(month) + '-' + str(day))
+
+    params = {
+        'title':'代行要請',
+        'message':'top',
+        'msg':'前に戻る',
+        'form':classform,
+        'data':data,
+        'year':year,
+        'month':month,
+        'day':day,
+    }
+    print(classform)
+    
     return render(request,'hello/create.html',params)
 
 @login_required(login_url='/hello/login/')
