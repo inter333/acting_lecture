@@ -37,7 +37,7 @@
                     {% if month_current.month != day.month %}
                         {{ day | date:"m/d" }}
                     {% else %}
-                        {{ day.day }}
+                        <a href="{% url 'hello:index' day.year day.month day.day %}">{{ day.day }}</a>
                     {% endif %}
 
                     {% for schedule in schedules %}
