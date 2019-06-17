@@ -22,4 +22,12 @@ urlpatterns = [
         path('search',views.search,name='search'),
         path('register/<int:num>/<int:year>/<int:month>/<int:day>',views.register,name='register'),
         path('cancel/<int:num>/<int:year>/<int:month>/<int:day>',views.cancel,name='cancel'),
+        path(
+        'month_with_schedule/',
+        views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'
+        ),
+        path(
+        'month_with_schedule/<int:year>/<int:month>/',
+        views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'
+        ),
 ]
