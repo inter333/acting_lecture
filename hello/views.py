@@ -199,15 +199,17 @@ class MonthCalendar(LoginRequiredMixin,mixins.MonthCalendarMixin, generic.Templa
 
 
 class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
+    login_url = '/login/'
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'hello/month_with_schedule.html'
     model = Schedule
     date_field = 'date'
     data = Classes.objects.all()
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,year,month,**kwargs):
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
+        context['data'] = Classes.objects.filter(date__year=year,date__month=month)
         return context
 
