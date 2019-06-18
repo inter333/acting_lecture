@@ -203,6 +203,7 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
     template_name = 'hello/month_with_schedule.html'
     model = Schedule
     date_field = 'date'
+    data = Classes.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

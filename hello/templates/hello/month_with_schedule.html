@@ -40,8 +40,14 @@
                         <a href="{% url 'hello:index' day.year day.month day.day %}">{{ day.day }}</a>
                     {% endif %}
 
-                    {% for schedule in schedules %}
-                        <p>{{ schedule.summary }}</p>
+                    {% for item in data %}
+                        <tr>
+                            <td>{{item.date}}</td>
+                            <td>{{item.time}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.grade}}</td>
+                            <td>{{item.subject}}</td>
+                            <td>{{item.remark}}</td>
                     {% endfor %}
                 </div>
                 </td>
