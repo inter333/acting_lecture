@@ -2,6 +2,8 @@ import calendar
 import datetime
 from collections import deque
 import itertools
+from .forms import ClassesForm
+from .models import Classes
 
 class BaseCalendarMixin:
     """カレンダー関連Mixinの、基底クラス"""
@@ -80,7 +82,7 @@ class MonthWithScheduleMixin(MonthCalendarMixin):
             '{}__range'.format(self.date_field): (start, end)
         }
         # 例えば、Schedule.objects.filter(date__range=(1日, 31日)) になる
-        queryset = self.model.objects.filter(**lookup)
+        queryset = self.Classes.objects.filter(**lookup)
 
         # {1日のdatetime: 1日のスケジュール全て, 2日のdatetime: 2日の全て...}のような辞書を作る
         day_schedules = {day: [] for week in days for day in week}

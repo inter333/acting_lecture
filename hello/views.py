@@ -202,7 +202,6 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
     login_url = '/login/'
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'hello/month_with_schedule.html'
-    model = Schedule
     date_field = 'date'
     data = Classes.objects.all()
 
