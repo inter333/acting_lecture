@@ -16,6 +16,7 @@ from .models import Schedule
 
 
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -202,6 +203,7 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
     login_url = '/login/'
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'hello/month_with_schedule.html'
+    model = Classes
     date_field = 'date'
     data = Classes.objects.all()
 
